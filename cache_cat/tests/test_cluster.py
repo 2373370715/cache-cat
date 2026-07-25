@@ -165,3 +165,7 @@ print(r.bitcount("test25", 0, -1))
 r.setbit("test26", 0, 0)   # 第0位设为0（默认就是0，这行可省略）
 r.setbit("test26", 1, 1)   # 第1位设为1
 print(r.bitpos("test26", 1))  # 返回 1
+
+
+r.sadd("test27", "test")
+print(r.scard("test27"))

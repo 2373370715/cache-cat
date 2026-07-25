@@ -1,5 +1,7 @@
 use crate::error::CacheCatError;
 use crate::error::ProtocolError;
+use crate::protocol::bitmap::bitcount::BitCountCommand;
+use crate::protocol::bitmap::bitpos::BitPosCommand;
 use crate::protocol::bitmap::getbit::GetBitCommand;
 use crate::protocol::bitmap::setbit::SetBitCommand;
 use crate::protocol::connection::auth::AuthCommand;
@@ -57,6 +59,7 @@ use crate::protocol::server::save::SaveCommand;
 use crate::protocol::server::shutdown::ShutdownCommand;
 use crate::protocol::server::time::TimeCommand;
 use crate::protocol::set::sadd::SAddCommand;
+use crate::protocol::set::scard::SCardCommand;
 use crate::protocol::set::sismember::SIsMemberCommand;
 use crate::protocol::set::smembers::SMembersCommand;
 use crate::protocol::set::srem::SRemCommand;
@@ -97,8 +100,6 @@ use tokio::select;
 use tokio::sync::watch;
 use tokio_util::codec::Framed;
 use tracing::{error, warn};
-use crate::protocol::bitmap::bitcount::BitCountCommand;
-use crate::protocol::bitmap::bitpos::BitPosCommand;
 
 #[async_trait]
 pub trait Command: Send + Sync {
@@ -326,6 +327,7 @@ impl CommandFactory {
         factory.register("GETBIT", GetBitCommand);
         factory.register("BITCOUNT", BitCountCommand);
         factory.register("BITPOS", BitPosCommand);
+        factory.register("SCARD", SCardCommand);
         // Lua scripting
         factory.register("EVAL", EvalCommand);
         factory.register("EVALSHA", EvalShaCommand);

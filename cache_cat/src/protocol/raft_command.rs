@@ -1,4 +1,6 @@
 use crate::error::ProtocolError;
+use crate::protocol::bitmap::bitcount::BitCountCommand;
+use crate::protocol::bitmap::bitpos::BitPosCommand;
 use crate::protocol::bitmap::getbit::GetBitCommand;
 use crate::protocol::bitmap::setbit::SetBitCommand;
 use crate::protocol::hash::hexists::HExistsCommand;
@@ -14,6 +16,7 @@ use crate::protocol::hash::hvals::HValsCommand;
 use crate::protocol::key::del::DelCommand;
 use crate::protocol::key::exists::ExistsCommand;
 use crate::protocol::key::expire::ExpireCommand;
+use crate::protocol::key::flushdb::FlushDBCommand;
 use crate::protocol::key::persist::PersistCommand;
 use crate::protocol::key::pexpire::PExpireCommand;
 use crate::protocol::key::pttl::PTtlCommand;
@@ -33,6 +36,7 @@ use crate::protocol::list::rpop::RPopCommand;
 use crate::protocol::list::rpush::RPushCommand;
 use crate::protocol::lua::eval::EvalCommand;
 use crate::protocol::set::sadd::SAddCommand;
+use crate::protocol::set::scard::SCardCommand;
 use crate::protocol::set::sismember::SIsMemberCommand;
 use crate::protocol::set::smembers::SMembersCommand;
 use crate::protocol::set::srem::SRemCommand;
@@ -60,9 +64,6 @@ use crate::raft::types::entry::request::Operation;
 use std::collections::HashMap;
 use std::fmt;
 use tracing::warn;
-use crate::protocol::bitmap::bitcount::BitCountCommand;
-use crate::protocol::bitmap::bitpos::BitPosCommand;
-use crate::protocol::key::flushdb::FlushDBCommand;
 
 pub trait RaftCommand: Send + Sync {
     fn raft_request(&self, items: &[Value]) -> Result<Operation, ProtocolError>;
@@ -167,7 +168,7 @@ impl RaftCommandFactory {
         factory.register("FLUSHDB", FlushDBCommand);
         factory.register("BITCOUNT", BitCountCommand);
         factory.register("BITPOS", BitPosCommand);
-
+        factory.register("SCARD", SCardCommand);
         factory
     }
 
