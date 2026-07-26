@@ -1,5 +1,6 @@
 use crate::error::ProtocolError;
 use crate::protocol::bitmap::bitcount::BitCountCommand;
+use crate::protocol::bitmap::bitfield::BitFieldCommand;
 use crate::protocol::bitmap::bitpos::BitPosCommand;
 use crate::protocol::bitmap::getbit::GetBitCommand;
 use crate::protocol::bitmap::setbit::SetBitCommand;
@@ -169,6 +170,7 @@ impl RaftCommandFactory {
         factory.register("BITCOUNT", BitCountCommand);
         factory.register("BITPOS", BitPosCommand);
         factory.register("SCARD", SCardCommand);
+        factory.register("BITFIELD", BitFieldCommand);
         factory
     }
 
