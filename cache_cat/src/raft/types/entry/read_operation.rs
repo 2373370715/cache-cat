@@ -1,4 +1,5 @@
 use crate::protocol::bitmap::bitcount::BitCountParams;
+use crate::protocol::bitmap::bitpos::BitPosParams;
 use crate::protocol::bitmap::getbit::GetBitParams;
 use crate::protocol::hash::hexists::HExistsParams;
 use crate::protocol::hash::hget::HGetParams;
@@ -14,6 +15,7 @@ use crate::protocol::key::type_::TypeParams;
 use crate::protocol::list::lindex::LIndexParams;
 use crate::protocol::list::llen::LLenParams;
 use crate::protocol::list::lrange::LRangeParams;
+use crate::protocol::set::scard::SCardParams;
 use crate::protocol::set::sismember::SIsMemberParams;
 use crate::protocol::set::smembers::SMembersParams;
 use crate::protocol::string::get::GetParams;
@@ -22,7 +24,6 @@ use crate::protocol::string::mget::MgetParams;
 use crate::protocol::zset::zrange::ZRangeParams;
 use crate::protocol::zset::zrangegetscore::ZRangeByScoreParams;
 use serde::{Deserialize, Serialize};
-use crate::protocol::bitmap::bitpos::{BitPosCommand, BitPosParams};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ReadOperation {
@@ -50,4 +51,5 @@ pub enum ReadOperation {
     HLen(HLenParams),
     BitCount(BitCountParams),
     BitPos(BitPosParams),
+    SCard(SCardParams),
 }

@@ -35,6 +35,7 @@ pub fn read_request(
         ReadOperation::HLen(param) => my_cache.execute_read(param, db_number, read_clock),
         ReadOperation::BitCount(param) => my_cache.execute_read(param, db_number, read_clock),
         ReadOperation::BitPos(param) => my_cache.execute_read(param, db_number, read_clock),
+        ReadOperation::SCard(param) => my_cache.execute_read(param, db_number, read_clock),
     }
 }
 
@@ -79,6 +80,7 @@ pub fn base_request(
         BaseOperation::LTrim(param) => my_cache.l_trim(param, update),
         BaseOperation::FlushDB(param) => my_cache.flush_db(param, update),
         BaseOperation::FlushAll(param) => my_cache.flush_all(param, update),
+        BaseOperation::BitField(param) => my_cache.bit_field(param, update),
         BaseOperation::SPop(param) => my_cache.s_pop(param, update),
     }
 }
