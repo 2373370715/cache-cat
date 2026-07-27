@@ -79,6 +79,7 @@ pub fn base_request(
         BaseOperation::LTrim(param) => my_cache.l_trim(param, update),
         BaseOperation::FlushDB(param) => my_cache.flush_db(param, update),
         BaseOperation::FlushAll(param) => my_cache.flush_all(param, update),
+        BaseOperation::SPop(param) => my_cache.s_pop(param, update),
     }
 }
 

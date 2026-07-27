@@ -63,6 +63,7 @@ use tracing::warn;
 use crate::protocol::bitmap::bitcount::BitCountCommand;
 use crate::protocol::bitmap::bitpos::BitPosCommand;
 use crate::protocol::key::flushdb::FlushDBCommand;
+use crate::protocol::set::spop::SPopCommand;
 
 pub trait RaftCommand: Send + Sync {
     fn raft_request(&self, items: &[Value]) -> Result<Operation, ProtocolError>;
@@ -167,7 +168,7 @@ impl RaftCommandFactory {
         factory.register("FLUSHDB", FlushDBCommand);
         factory.register("BITCOUNT", BitCountCommand);
         factory.register("BITPOS", BitPosCommand);
-
+        factory.register("SPOP", SPopCommand);
         factory
     }
 

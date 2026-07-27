@@ -31,6 +31,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::fmt::Display;
 use crate::protocol::key::flushall::FlushAllReq;
+use crate::protocol::set::spop::SPopReq;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum BaseOperation {
@@ -71,6 +72,7 @@ pub enum BaseOperation {
     // set
     SAdd(SAddReq),
     SRem(SRemReq),
+    SPop(SPopReq),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

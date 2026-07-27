@@ -130,6 +130,7 @@ impl fmt::Display for Request {
                 BaseOperation::LTrim(req) => write!(f, "LTrim: {}", req),
                 BaseOperation::FlushDB(req) => write!(f, "FlushDB: {}", req),
                 BaseOperation::FlushAll(req) => write!(f, "FlushAll: {}", req),
+                BaseOperation::SPop(req) => write!(f, "SPop: {}", req),
             },
             Operation::Redis(op) => match op {
                 RedisOperation::RedisSet(req) => write!(f, "RedisSet: {}", req),

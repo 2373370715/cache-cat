@@ -99,6 +99,7 @@ use tokio_util::codec::Framed;
 use tracing::{error, warn};
 use crate::protocol::bitmap::bitcount::BitCountCommand;
 use crate::protocol::bitmap::bitpos::BitPosCommand;
+use crate::protocol::set::spop::SPopCommand;
 
 #[async_trait]
 pub trait Command: Send + Sync {
@@ -316,6 +317,7 @@ impl CommandFactory {
         factory.register("SMEMBERS", SMembersCommand);
         factory.register("SREM", SRemCommand);
         factory.register("SISMEMBER", SIsMemberCommand);
+        factory.register("SPOP", SPopCommand);
         // ZSet commands
         factory.register("ZADD", ZAddCommand);
         factory.register("ZRANGE", ZRangeCommand);
